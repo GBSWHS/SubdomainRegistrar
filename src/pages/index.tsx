@@ -19,7 +19,7 @@ import { VAILD_DOMAIN, VAILD_IPV4 } from '../utils/regex'
 export default function IndexPage () {
   const updateXarrow = useXarrow()
 
-  const domainInput = useRef<HTMLSpanElement>()
+  const domainInput = useRef<any>()
 
   const [ip, setIp] = useState('104.26.4.215')
   const [domain, setDomain] = useState('www')
@@ -29,14 +29,14 @@ export default function IndexPage () {
   useEffect(() => domainInput.current.focus(), [])
 
   function domainOnInput (e: FormEvent<HTMLSpanElement>) {
-    const value = (e.target as HTMLSpanElement).textContent
+    const value = (e.target as any).textContent
 
     setDomain(value)
     updateXarrow()
   }
 
   function ipOnInput (e: FormEvent<HTMLSpanElement>) {
-    const value = (e.target as HTMLSpanElement).textContent
+    const value = (e.target as any).textContent
 
     setIp(value)
     updateXarrow()

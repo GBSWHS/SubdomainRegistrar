@@ -35,7 +35,7 @@ export default function SignModal ({ open, didClose, domain, ip }: Props) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ domain, ip })
-    }).then((res) => res.json())
+    }).then((res) => res.json()) as unknown as any
 
     if (res.error === 'TOKEN_INVALID') {
       toast.error('서명 실패: 서명 토큰이 올바르지 않습니다.')
