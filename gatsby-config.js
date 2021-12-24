@@ -7,19 +7,6 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-image',
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
-    'gatsby-plugin-postcss',
-    {
-      resolve: 'gatsby-plugin-manifest',
-      options: {
-        name: 'subdomain-registrar',
-        short_name: 'subdomain',
-        start_url: '/',
-        background_color: '#fafafa',
-        display: 'minimal-ui'
-      }
-    }
+    'gatsby-plugin-postcss'
   ]
 }
