@@ -20,8 +20,8 @@ export default function IndexPage () {
 
   const domainInput = useRef<any>()
 
-  const [ip, setIp] = useState('104.26.4.215')
-  const [domain, setDomain] = useState('www')
+  const [ip, setIp] = useState('')
+  const [domain, setDomain] = useState('')
 
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -66,7 +66,7 @@ export default function IndexPage () {
             <p><FontAwesomeIcon size="3x" icon={faGlobe}/></p>
             <p>Domain</p>
             <div onClick={() => domainInput.current.focus()} className="flex justify-center mt-1 bg-gray-200 border-b-2 border-white cursor-text focus-within:border-blue-400">
-              <input ref={domainInput} onInput={domainOnInput} spellCheck="false" className="w-1/5 py-1 pl-3 font-mono text-right bg-transparent focus:outline-none" value={domain} />
+              <input ref={domainInput} onInput={domainOnInput} spellCheck="false" className="w-1/5 py-1 pl-3 font-mono text-right bg-transparent focus:outline-none" placeholder="www" />
               <span className="py-1 pr-3 font-mono text-gray-400">.gbsw.hs.kr</span>
             </div>
             <div className="mt-3 text-xs text-gray-400">
@@ -82,7 +82,7 @@ export default function IndexPage () {
             <p>Server</p>
             <div className="flex justify-center mt-1 bg-gray-200 border-b-2 border-white focus-within:border-blue-400">
               <span className="py-1 pl-3 pr-1 font-mono text-gray-400">IP:</span>
-              <input onInput={ipOnInput} className="py-1 pr-3 font-mono bg-transparent focus:outline-none cursor-text" value={ip}/>
+              <input onInput={ipOnInput} className="py-1 pr-3 font-mono bg-transparent focus:outline-none cursor-text" placeholder="104.26.4.215"/>
             </div>
             <div className="mt-3 text-xs text-gray-400">
               서브도메인이 가르킬 서버의 IP를 입력하세요.
