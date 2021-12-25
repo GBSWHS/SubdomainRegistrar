@@ -37,8 +37,8 @@ export default function SignModal ({ open, didClose, domain, ip }: Props) {
     }).then((res) => res.json()) as unknown as any
 
     if (res.error === 'TOKEN_INVALID') {
+      toast.success('로그인 화면으로 이동했습니다!', { duration: 10000 })
       toast.error('서명 실패: 서명 토큰이 올바르지 않습니다.')
-      toast.loading('로그인 화면으로 이동합니다', { duration: 2000 })
       window.open('/api/login', '_blank')
       setIsLoading(false)
       return
@@ -51,8 +51,8 @@ export default function SignModal ({ open, didClose, domain, ip }: Props) {
     }
 
     if (res.error === 'MAX_SIGN_REACHED') {
-      toast.error('서명 실패: 최대 서명 가능 수 (일반적으로 5번)를 초과하였습니다.')
       toast('서명 가능 수를 늘리려면 관리자에게 문의하세요.')
+      toast.error('서명 실패: 최대 서명 가능 수 (일반적으로 5번)를 초과하였습니다.')
       setIsLoading(false)
       return
     }
