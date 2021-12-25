@@ -1,4 +1,3 @@
-import { navigate } from 'gatsby'
 import React, { useState } from 'react'
 
 import toast from 'react-hot-toast'
@@ -40,7 +39,7 @@ export default function SignModal ({ open, didClose, domain, ip }: Props) {
     if (res.error === 'TOKEN_INVALID') {
       toast.error('서명 실패: 서명 토큰이 올바르지 않습니다.')
       toast.loading('로그인 화면으로 이동합니다')
-      await navigate('/api/login')
+      window.location.assign('/api/login')
       return
     }
 
@@ -60,7 +59,7 @@ export default function SignModal ({ open, didClose, domain, ip }: Props) {
     toast.success('서명 완료!')
     toast.loading('해당 웹사이트로 이동합니다')
 
-    navigate(`https://${domain}.gbsw.hs.kr`)
+    window.location.assign(`https://${domain}.gbsw.hs.kr`)
   }
 
   return (
