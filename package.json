@@ -48,5 +48,6 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean"
   },
-  "repository": "git@github.com:GBSWHS/SubdomainRegistrar.git"
+  "repository": "git@github.com:GBSWHS/SubdomainRegistrar.git",
+  "platform": "node"
 }
