@@ -1,9 +1,13 @@
-import cookie from 'cookie'
-import jwt from 'jsonwebtoken'
+/* global PagesFunction */
 
-function jwtVerify (token: string) {
+import { JWT } from '../utils/jwt'
+
+async function jwtVerify (token: string) {
+  const jwt = new JWT()
+
   try {
-    return jwt.verify(token, process.env.JWT_SECRET!)
+    await jwt.verify(token, JWT_SECRET!)
+    return jwt.decode(token)
   } catch (_) {
     return null
   }
@@ -17,16 +21,21 @@ function sendJSON (data: any) {
   })
 }
 
-// eslint-disable-next-line no-undef
-export const onRequest: PagesFunction = (context) => {
+export const onRequest: PagesFunction = async (context) => {
+  if (context.request.method !== 'POST') {
+    return sendJSON({
+      error: 'METHOD_NOT_ALLOWED'
+    })
+  }
+
   const cookies = context.request.headers.get('Cookies')
-  const token = cookie.parse(cookies!).token
+  const token = cookies ? cookies.split('; ').find(c => c.startsWith('token=')) : null
 
   if (!token) {
     return sendJSON({ error: 'TOKEN_INVALID' })
   }
 
-  const decoded = jwtVerify(token) as jwt.JwtPayload
+  const decoded = await jwtVerify(token)
 
   if (!decoded) {
     return sendJSON({ error: 'TOKEN_INVALID' })

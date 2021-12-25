@@ -5,6 +5,6 @@
     "lib": ["ES2020"],
     "esModuleInterop": true,
     "jsx": "react",
-    "types": ["@cloudflare/workers-types"]
+    "types": ["node", "@cloudflare/workers-types"]
   }
 }
