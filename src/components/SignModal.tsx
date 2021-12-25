@@ -39,7 +39,7 @@ export default function SignModal ({ open, didClose, domain, ip }: Props) {
     if (res.error === 'TOKEN_INVALID') {
       toast.error('서명 실패: 서명 토큰이 올바르지 않습니다.')
       toast.loading('로그인 화면으로 이동합니다')
-      window.location.assign('/api/login')
+      window.open('/api/login', '_blank')
       return
     }
 
