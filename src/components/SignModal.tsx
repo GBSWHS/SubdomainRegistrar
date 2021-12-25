@@ -58,9 +58,8 @@ export default function SignModal ({ open, didClose, domain, ip }: Props) {
     }
 
     toast.success('서명 완료!')
-    toast.loading('해당 웹사이트로 이동합니다')
-
-    window.location.assign(`https://${domain}.gbsw.hs.kr`)
+    didClose()
+    window.open(`https://${domain}.gbsw.hs.kr`, '_blank')
   }
 
   return (
