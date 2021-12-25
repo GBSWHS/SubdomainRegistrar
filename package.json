@@ -22,7 +22,6 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-draggable": "^4.4.4",
     "react-helmet": "^6.1.0",
     "react-hot-toast": "^2.1.1",
     "react-xarrows": "^2.0.2"

@@ -1,6 +1,5 @@
 import React, { FormEvent, useEffect, useRef, useState } from 'react'
 
-import Draggable from 'react-draggable'
 import toast, { Toaster } from 'react-hot-toast'
 import Xarrow, { useXarrow, Xwrapper } from 'react-xarrows'
 
@@ -28,17 +27,13 @@ export default function IndexPage () {
 
   useEffect(() => domainInput.current.focus(), [])
 
-  function domainOnInput (e: FormEvent<HTMLSpanElement>) {
-    const value = (e.target as any).textContent
-
-    setDomain(value)
+  function domainOnInput (e: FormEvent<HTMLInputElement>) {
+    setDomain((e.target as any).value)
     updateXarrow()
   }
 
-  function ipOnInput (e: FormEvent<HTMLSpanElement>) {
-    const value = (e.target as any).textContent
-
-    setIp(value)
+  function ipOnInput (e: FormEvent<HTMLInputElement>) {
+    setIp((e.target as any).value)
     updateXarrow()
   }
 
@@ -63,44 +58,36 @@ export default function IndexPage () {
       <Title />
       <div className="flex flex-wrap items-center justify-center gap-16">
         <Xwrapper>
-          <Draggable onDrag={updateXarrow} onStop={updateXarrow}>
-            <div id="user" className="hidden px-5 py-3 text-center text-gray-600 bg-white rounded shadow cursor-move sm:block">
-              <p><FontAwesomeIcon size="3x" icon={faUser}/></p>
-              <p className="mt-3">User</p>
+          <div id="user" className="hidden px-5 py-3 text-center text-gray-600 bg-white rounded shadow sm:block">
+            <p><FontAwesomeIcon size="3x" icon={faUser}/></p>
+            <p className="mt-3">User</p>
+          </div>
+          <div id="domain" className="px-5 py-3 text-center text-gray-600 bg-white rounded shadow">
+            <p><FontAwesomeIcon size="3x" icon={faGlobe}/></p>
+            <p>Domain</p>
+            <div onClick={() => domainInput.current.focus()} className="flex justify-center mt-1 bg-gray-200 border-b-2 border-white cursor-text focus-within:border-blue-400">
+              <input ref={domainInput} onInput={domainOnInput} spellCheck="false" className="w-1/5 py-1 pl-3 font-mono text-right bg-transparent focus:outline-none" value={domain} />
+              <span className="py-1 pr-3 font-mono text-gray-400">.gbsw.hs.kr</span>
             </div>
-          </Draggable>
-          <Draggable onDrag={updateXarrow} onStop={updateXarrow}>
-            <div id="domain" className="px-5 py-3 text-center text-gray-600 bg-white rounded shadow cursor-move">
-              <p><FontAwesomeIcon size="3x" icon={faGlobe}/></p>
-              <p>Domain</p>
-              <div onClick={() => domainInput.current.focus()} className="flex justify-center mt-1 bg-gray-200 border-b-2 border-white cursor-text focus-within:border-blue-400">
-                <span ref={domainInput} onInput={domainOnInput} spellCheck="false" role="textbox" contentEditable className="py-1 pl-3 font-mono text-right focus:outline-none">www</span>
-                <span className="py-1 pr-3 font-mono text-gray-400">.gbsw.hs.kr</span>
-              </div>
-              <div className="mt-3 text-xs text-gray-400">
-                .gbsw.hs.kr로 끝나는 서브도메인을 입력하세요.
-              </div>
+            <div className="mt-3 text-xs text-gray-400">
+              .gbsw.hs.kr로 끝나는 서브도메인을 입력하세요.
             </div>
-          </Draggable>
-          <Draggable onDrag={updateXarrow} onStop={updateXarrow}>
-            <div id="cf" className="hidden px-5 py-3 text-center text-gray-600 bg-white rounded shadow cursor-move lg:block">
-              <p><FontAwesomeIcon size="3x" icon={faCloudflare}/></p>
-              <p>CF DNS</p>
+          </div>
+          <div id="cf" className="hidden px-5 py-3 text-center text-gray-600 bg-white rounded shadow lg:block">
+            <p><FontAwesomeIcon size="3x" icon={faCloudflare}/></p>
+            <p>CF DNS</p>
+          </div>
+          <div id="ip" className="px-5 py-3 text-center text-gray-600 bg-white rounded shadow">
+            <p><FontAwesomeIcon size="3x" icon={faServer}/></p>
+            <p>Server</p>
+            <div className="flex justify-center mt-1 bg-gray-200 border-b-2 border-white focus-within:border-blue-400">
+              <span className="py-1 pl-3 pr-1 font-mono text-gray-400">IP:</span>
+              <input onInput={ipOnInput} className="py-1 pr-3 font-mono bg-transparent focus:outline-none cursor-text" value={ip}/>
             </div>
-          </Draggable>
-          <Draggable onDrag={updateXarrow} onStop={updateXarrow}>
-            <div id="ip" className="px-5 py-3 text-center text-gray-600 bg-white rounded shadow cursor-move">
-              <p><FontAwesomeIcon size="3x" icon={faServer}/></p>
-              <p>Server</p>
-              <div className="flex justify-center mt-1 bg-gray-200 border-b-2 border-white focus-within:border-blue-400">
-                <span className="py-1 pl-3 pr-1 font-mono text-gray-400">IP:</span>
-                <span onInput={ipOnInput} role="textbox" contentEditable className="py-1 pr-3 font-mono focus:outline-none cursor-text">104.26.4.215</span>
-              </div>
-              <div className="mt-3 text-xs text-gray-400">
-                서브도메인이 가르킬 서버의 IP를 입력하세요.
-              </div>
+            <div className="mt-3 text-xs text-gray-400">
+              서브도메인이 가르킬 서버의 IP를 입력하세요.
             </div>
-          </Draggable>
+          </div>
         </Xwrapper>
       </div>
       <Button onClick={onConnect}>연결하기!</Button>
